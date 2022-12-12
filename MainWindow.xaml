@@ -1,0 +1,115 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:SkiService_App.ViewModel"
+        xmlns:local="clr-namespace:SkiService_App"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        x:Class="SkiService_App.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="720"
+        Width="1080"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <Ribbon DockPanel.Dock="Top"
+                    Margin="0 -22"
+                    VerticalAlignment="Top">
+                <Ribbon.ApplicationMenu>
+                    <RibbonApplicationMenu SmallImageSource="image/icons8-startseite-64.png">
+                        <RibbonApplicationMenu.AuxiliaryPaneContent>
+                            <RibbonGallery ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <RibbonGalleryCategory MaxColumnCount="1">
+                                    <RibbonGalleryItem x:Name="item5"
+                                                       Content="Nocksoft"
+                                                       MouseOverBackground="Transparent"
+                                                       MouseOverBorderBrush="Transparent"
+                                                       CheckedBackground="Transparent"
+                                                       CheckedBorderBrush="Transparent" />
+                                    <RibbonGalleryItem />
+                                </RibbonGalleryCategory>
+                            </RibbonGallery>
+                        </RibbonApplicationMenu.AuxiliaryPaneContent>
+                        <RibbonApplicationMenuItem x:Name="item1"
+                                                   Header="Hinzufügen"
+                                                   ImageSource="image/icons8-add-new-30.png" />
+                        <RibbonApplicationMenuItem x:Name="item4"
+                                                   Header="Einstellungen"
+                                                   ImageSource="image/icons8-settings-24.png" />
+                        <RibbonApplicationMenuItem x:Name="item9"
+                                                   Header="Login"
+                                                   ImageSource="image/icons8-männlicher.png" />
+                    </RibbonApplicationMenu>
+                </Ribbon.ApplicationMenu>
+                <RibbonTab x:Name="tab1"
+                           Header="Tab1">
+                    <RibbonGroup x:Name="gruppe1">
+                        <RibbonButton x:Name="btn1"
+                                      Label="Neu.."
+                                      LargeImageSource="image/icons8-fügen-sie-benutzer.png"
+                                      Height="54"
+                                      Width="49"
+                                      Command="{Binding Hinzufügen}" />
+                        <RibbonButton x:Name="btn2"
+                                      Label="Speichern"
+                                      LargeImageSource="image/icons8-save-30.png" />
+                        <RibbonButton x:Name="btn3"
+                                      Label="Akktualisieren"
+                                      Command="{Binding Aktualisieren}"
+                                      LargeImageSource="image/icons8-refresh-48.png" />
+                    </RibbonGroup>
+                    <RibbonGroup x:Name="gruppe2">
+                        <RibbonButton x:Name="btn4"
+                                      Label="Löschen"
+                                      LargeImageSource="image/icons8-trash-can-50.png" />
+                        <RibbonButton x:Name="btn5"
+                                      Label="Bearbeiten"
+                                      LargeImageSource="image/icons8-edit-file-80.png"
+                                      />
+                    </RibbonGroup>
+                </RibbonTab>
+            </Ribbon>
+        </DockPanel>
+
+        <DataGrid x:Name="data_Grit"
+                  ItemsSource="{Binding cli}"
+                  AutoGenerateColumns="False"
+                  CanUserResizeColumns="True"
+                  Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id"
+                                    Binding="{Binding ClientID}"/>
+                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding Name}" 
+                                    Stylus.IsTouchFeedbackEnabled="True"/>
+                <DataGridTextColumn Header="E-Mail"
+                                    Binding="{Binding EMail}" />
+                <DataGridTextColumn Header="Phone"
+                                    Binding="{Binding Phone}" />
+                <DataGridTextColumn Header="CreateDate"
+                                    mah:DatePickerHelper.DropDownButtonContent="d"
+                                    Binding="{Binding CreateDate}" />
+                <DataGridTextColumn Header="PickupDate"
+                                    Binding="{Binding PickupDate}" />
+                <DataGridTextColumn Header="FacilityName"
+                                    Binding="{Binding FacilityName}" />
+                <DataGridTextColumn Header="PriorityName"
+                                    Binding="{Binding PriorityName}" />
+                <DataGridTextColumn Header="StatusName"
+                                    Binding="{Binding StatusName}" />
+                <DataGridTextColumn Header="Kommentar"
+                                    Binding="{Binding Kommentar}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
