@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using Microsoft.Xaml.Behaviors.Media;
+using RestSharp;
 using Sample3.Utility;
 using SkiService_App.Db;
 using SkiService_App.Model;
@@ -20,19 +21,32 @@ namespace SkiService_App.ViewModel
     public class NewClientViewModel : ViewModelBase
     {
       
+        //public NewClientsView txtB = new NewClientsView();
         private ObservableCollection<Client> _clientlist = new ObservableCollection<Client>();
 
-       
+        public Client _curentClient = new Client();
         private Client _editClent = new Client();
         Database db = new Database();
+
         private RelayCommand _cmdSave { get; set; }
+        private RelayCommand _cmdBuild { get; set; }
 
 
         public NewClientViewModel()
-        {              
+        {
+            _cmdBuild = new RelayCommand(param => Build());
             _cmdSave = new RelayCommand(param => Save());
         }
 
+        public Client CurentClient
+        {
+            get { return _curentClient; }
+            set
+            {
+                SetProperty<Client>(ref _curentClient, value);
+                CurentClient = _curentClient;
+            }
+        }
 
         public Client EditClient
         {
@@ -40,7 +54,13 @@ namespace SkiService_App.ViewModel
             set
             {
                 SetProperty<Client>(ref _editClent, value);
+                EditClient = _editClent;
             }
+        }
+        public RelayCommand CmdBuild
+        {
+            get { return _cmdBuild; }
+            set { _cmdBuild = value; }
         }
 
         public RelayCommand CmdSave
@@ -57,34 +77,6 @@ namespace SkiService_App.ViewModel
         }
 
 
-        // Setzt das Datum je nach Prio
-        private string _priority;
-        public string Priority
-        {
-            get { return _priority; }
-            set
-            {
-                if (value != _priority)
-                {
-                    SetProperty(ref _priority, value);
-                }
-
-                if (_priority == "Hoch")
-                {
-                    EditClient.PickupDate = EditClient.CreateDate.AddDays(5);
-                }
-                else if (_priority == "Niedrig")
-                {
-                    EditClient.PickupDate = EditClient.CreateDate.AddDays(12);
-                }
-                else
-                {
-                    EditClient.PickupDate = EditClient.CreateDate.AddDays(7);
-                }
-            }
-        }
-
-
         private async void Save()
          
         {          
@@ -92,7 +84,13 @@ namespace SkiService_App.ViewModel
                 var client = new RestClient("https://localhost:7113/Registration");
                 var request = new RestRequest().AddJsonBody(json);
                 request.AddHeader("apiKey", "hL4bA4nB4yI0vI0fC8fH7eT6");
-                var response = await client.ExecutePostAsync(request);           
+                var response = await client.ExecutePostAsync(request);
+                MessageBox.Show(response.StatusCode.ToString());
+        }
+
+        private async void Build()
+        {
+            
         }
     }
 }

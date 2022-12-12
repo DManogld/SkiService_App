@@ -30,30 +30,6 @@ namespace SkiService_App.Db
                 MessageBox.Show("Leider ist die Datenbank nicht Verbunden");
                 return NA;
             }
-            //using (HttpClient ApiClient = new HttpClient())
-            //{
-
-
-            //    HttpRequestMessage request = new HttpRequestMessage();
-            //    request.RequestUri = new Uri("https://localhost:7113/Registration");
-            //    request.Method = HttpMethod.Get;
-            //    request.Headers.Add("apiKey", "hL4bA4nB4yI0vI0fC8fH7eT6");
-            //    HttpResponseMessage response = await ApiClient.SendAsync(request);
-            //    string jsonResponse = await response.Content.ReadAsStringAsync();
-            //    ObservableCollection<Client> collection = JsonConvert.DeserializeObject<ObservableCollection<Client>>(jsonResponse);
-            //    return collection; 
-            //};
-        }
-
-        public async Task<ObservableCollection<Client>> ConPost()
-        {
-
-            var client = new RestClient("https://localhost:7113/Registration");
-            var request = new RestRequest();
-            request.AddHeader("apiKey", "hL4bA4nB4yI0vI0fC8fH7eT6");
-            var response = await client.ExecuteGetAsync<Client>(request);
-            ObservableCollection<Client> collection = JsonConvert.DeserializeObject<ObservableCollection<Client>>(response.Content.ToString());
-            return collection;
         }
     }
 }

@@ -25,5 +25,20 @@ namespace SkiService_App.View
         {
             InitializeComponent();
         }
+
+        private void Expander_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+
+        }
+
+        private void Expander_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+        }
+
+        private void Window_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace SkiService_App.Model
             }
         }
 
-        private string _name;
+        private string _name = String.Empty;
         public string Name
         {
             get { return _name; }
@@ -38,7 +38,7 @@ namespace SkiService_App.Model
             }
         }
 
-        private string _email;
+        private string _email = String.Empty;
         public string EMail
         {
             get { return _email; }
@@ -51,7 +51,7 @@ namespace SkiService_App.Model
             }
         }
 
-        public string _phone;
+        public string _phone = String.Empty;
         public string Phone
         {
             get { return _phone; }
@@ -90,7 +90,7 @@ namespace SkiService_App.Model
             }
         }
 
-        private string _facilityName;
+        private string _facilityName= String.Empty;
         public string FacilityName
         {
             get { return _facilityName; }
@@ -103,20 +103,33 @@ namespace SkiService_App.Model
             }
         }
 
-        private string _priorityName;
+        private string _priorityName = String.Empty;
         public string PriorityName
         {
             get { return _priorityName; }
             set
             {
-                if(_priorityName != value)
+                if (value != _priorityName)
                 {
                     SetProperty(ref _priorityName, value);
+                }
+
+                if (_priorityName == "Hoch")
+                {
+                    PickupDate = CreateDate.AddDays(5);
+                }
+                else if (_priorityName == "Niedrig")
+                {
+                    PickupDate = CreateDate.AddDays(12);
+                }
+                else
+                {
+                   PickupDate = CreateDate.AddDays(7);
                 }
             }
         }
 
-        public string _statusName;
+        public string _statusName = String.Empty;
         public string StatusName
         {
             get { return _statusName; }
@@ -129,7 +142,7 @@ namespace SkiService_App.Model
             }
         }
 
-        private string _komentar;
+        private string _komentar = string.Empty;
         public string Kommentar
         {
             get { return _komentar; }
