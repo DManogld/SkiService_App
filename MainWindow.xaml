@@ -47,7 +47,7 @@
                                                    ImageSource="image/icons8-settings-24.png" />
                         <RibbonApplicationMenuItem x:Name="item9"
                                                    Header="Login"
-                                                   ImageSource="image/icons8-männlicher.png" />
+                                                   ImageSource="image/icons8-Login.png" />
                     </RibbonApplicationMenu>
                 </Ribbon.ApplicationMenu>
                 <RibbonTab x:Name="tab1"

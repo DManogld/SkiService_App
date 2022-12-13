@@ -40,5 +40,16 @@ namespace SkiService_App.View
         {
 
         }
+
+        private void Label_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            LoginView lv = new LoginView();
+            lv.Show();
+        }
     }
 }
