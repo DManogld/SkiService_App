@@ -25,11 +25,27 @@ namespace SkiService_App.Db
                 ObservableCollection<Client> collection = JsonConvert.DeserializeObject<ObservableCollection<Client>>(response.Content.ToString());
                 return collection;
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Leider ist die Datenbank nicht Verbunden");
+                MessageBox.Show("Leider ist die Datenbank nicht Verbunden" + ex.Message);
                 return NA;
             }
         }
+
+        //public async Task<ObservableCollection<Client>> ConDel()
+        //{
+        //    ObservableCollection<Client> DL = new ObservableCollection<Client>();
+        //    {
+        //        try
+        //        {
+        //            var client = new RestClient("https://localhost:7113/Registration");
+        //            var request = new RestRequest();
+        //            request.AddHeader("apiKey", "hL4bA4nB4yI0vI0fC8fH7eT6");
+        //            var response = await client.Delete<Client>(request);
+        //            ObservableCollection<Client> collection = JsonConvert.DeserializeObject<ObservableCollection<Client>>(response.Content.ToString());
+        //            return collection;
+        //        }
+        //    }
+        //}
     }
 }

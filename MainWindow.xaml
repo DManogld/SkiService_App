@@ -70,10 +70,12 @@
                     <RibbonGroup x:Name="gruppe2">
                         <RibbonButton x:Name="btn4"
                                       Label="Löschen"
-                                      LargeImageSource="image/icons8-trash-can-50.png" />
+                                      LargeImageSource="image/icons8-trash-can-50.png" 
+                                      Command="{Binding CmdDelete}"/>
                         <RibbonButton x:Name="btn5"
                                       Label="Bearbeiten"
                                       LargeImageSource="image/icons8-edit-file-80.png"
+                                      Command="{Binding CmdEdit}"
                                       />
                     </RibbonGroup>
                 </RibbonTab>
@@ -84,7 +86,8 @@
                   ItemsSource="{Binding cli}"
                   AutoGenerateColumns="False"
                   CanUserResizeColumns="True"
-                  Grid.Row="2">
+                  Grid.Row="2"
+                  SelectedItem="{Binding CurentClient}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id"
                                     Binding="{Binding ClientID}"/>

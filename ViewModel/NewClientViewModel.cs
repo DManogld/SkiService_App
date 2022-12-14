@@ -24,7 +24,6 @@ namespace SkiService_App.ViewModel
       
         //public NewClientsView txtB = new NewClientsView();
         private ObservableCollection<Client> _clientlist = new ObservableCollection<Client>();
-
         public Client _curentClient = new Client();
         private Client _editClent = new Client();
         private Mitarbeiter _currentMitarbeiter = new Mitarbeiter();

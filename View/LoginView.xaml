@@ -10,7 +10,7 @@
         MouseDown="Window_MouseDown"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
-        <vm:MainWindowViewModel />
+        <vm:LoginViewModel/>
     </Window.DataContext>
     <Grid>
         <StackPanel Orientation="Vertical">

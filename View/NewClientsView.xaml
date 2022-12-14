@@ -213,7 +213,7 @@
                               Text="{Binding EditClient.FacilityName}">
                         <ComboBoxItem>Kleiner Service</ComboBoxItem>
                         <ComboBoxItem>Grosse Service</ComboBoxItem>
-                        <ComboBoxItem>Rennski Services</ComboBoxItem>
+                        <ComboBoxItem>Rennski Service</ComboBoxItem>
                         <ComboBoxItem>Bindung montieren und eistellen</ComboBoxItem>
                         <ComboBoxItem>Fell zuschneiden</ComboBoxItem>
                         <ComboBoxItem>Heisswachsen</ComboBoxItem>

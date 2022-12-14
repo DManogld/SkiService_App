@@ -1,10 +1,15 @@
-﻿using Sample3.Utility;
+﻿using ControlzEx.Standard;
+using MahApps.Metro.Controls;
+using Newtonsoft.Json;
+using RestSharp;
+using Sample3.Utility;
 using SkiService_App.Db;
 using SkiService_App.Model;
 using SkiService_App.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO.Packaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -17,14 +22,18 @@ namespace SkiService_App.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
-       
+        bool isLogin = false;
         Database db = new Database();
         private Client _editClent = new Client();
+        private Client _curentClient = new Client();
+
         Mitarbeiter _curentMitarbeiter = new Mitarbeiter();
 
         private RelayCommand _cmdaktualisieren { get; set; }
         private RelayCommand _cmdhinzufügen { get; set; }
-        private RelayCommand _cmdlogin { get; set; }
+        public RelayCommand _cmddelete { get; set; }
+        public RelayCommand _cmdedit { get; set; }
+
 
         public bool CanGetData = false;
 
@@ -34,10 +43,10 @@ namespace SkiService_App.ViewModel
 
         public MainWindowViewModel()
         {
-
-            _cmdlogin = new RelayCommand(param => Anmelden());
+            _cmdedit = new RelayCommand(param => Edit());
             _cmdhinzufügen = new RelayCommand(param => Insert());
             _cmdaktualisieren = new RelayCommand(param => Refresh());
+            _cmddelete = new RelayCommand(param => Delete(), param => CanDelete()) ;
         }
 
 
@@ -53,10 +62,16 @@ namespace SkiService_App.ViewModel
             set { _cmdhinzufügen = value; }
         }
 
-        public RelayCommand Login
+        public RelayCommand CmdDelete
         {
-            get { return _cmdlogin; }
-            set { _cmdlogin = value; }
+            get { return _cmddelete; }
+            set { _cmddelete = value; }
+        }
+
+        public RelayCommand CmdEdit
+        {
+            get { return _cmdedit; }
+            set { _cmdedit = value; }
         }
 
         public ObservableCollection<Client> ClientModel
@@ -69,6 +84,7 @@ namespace SkiService_App.ViewModel
             }
         }
 
+
         public Client EditClient
         {
             get { return _editClent; }
@@ -78,18 +94,22 @@ namespace SkiService_App.ViewModel
             }
         }
 
-        public Mitarbeiter CurentMitarbeiter
+
+        public Client CurentClient
         {
-            get { return _curentMitarbeiter; }
+            get { return _curentClient; }
             set
             {
-                SetProperty<Mitarbeiter>(ref _curentMitarbeiter, value);
+                SetProperty<Client>(ref _curentClient, value);
+                EditClient = _curentClient;
             }
         }
 
+
         private async void Refresh()
         {
-            if (CanGetData == true)
+            LoginView lv = new LoginView();
+            if (isLogin == true)
             {
                 await (_client = db.ConGet());
                 ClientModel = _client.Result;
@@ -98,13 +118,13 @@ namespace SkiService_App.ViewModel
             {
                if( MessageBox.Show("Sie müssen sich zerst anmelden", "Anmelden?", MessageBoxButton.YesNoCancel,
                     MessageBoxImage.Question) == MessageBoxResult.Yes)
-               {
-                    OpenWindow();
+               {                                      
+                    lv.ShowDialog();        
+                    isLogin = true;
+                 
                }
             }
         }
-
-
 
         private async void Insert()
         {
@@ -112,31 +132,33 @@ namespace SkiService_App.ViewModel
                 newClient.ShowDialog();
         }
 
-
-        private void Anmelden()
+        private void Edit()
         {
+            EditView editView = new EditView();
+            editView.ShowDialog();
+        }
 
-            if (CurentMitarbeiter.Kürzel == "DMA" || CurentMitarbeiter.Kürzel == "SST" && CurentMitarbeiter.ApiKey == "hL4bA4nB4yI0vI0fC8fH7eT6")
-            {             
-                CanGetData = true;
-                OpenWindow();
-            }
-            else
+        private async void Delete()
+        {
+            if (MessageBox.Show("Wollen sie deisen Client wüglich löschen?", "Löschen?", MessageBoxButton.YesNo,
+                  MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                MessageBox.Show("Die Angaben sind Flasch");
+                if (CurentClient.ClientID != 0)
+                {
+                    string url = $"https://localhost:7113/Registration/{CurentClient.ClientID}";
+                    var client = new RestClient(url);
+                    var request = new RestRequest();
+                    request.AddHeader("apiKey", "hL4bA4nB4yI0vI0fC8fH7eT6");
+                    var response = await client.DeleteAsync(request);
+                    MessageBox.Show($"Eintrag mit der id {CurentClient.ClientID} wurde gelöscht", "Löschen", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Refresh();
+                }
             }
         }
 
-        private void OpenWindow()
+        private bool CanDelete()
         {
-            LoginView lw = new LoginView();
-
-            if (lw.IsActive)
-            {
-                lw.Close();
-            }
-            else
-            lw.ShowDialog();
+            return CurentClient != null;
         }
     }
 }
