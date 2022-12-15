@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SkiService_App.Model
 {
+    /// <summary>
+    /// Egenschaften von Mittarbeiter
+    /// </summary>
     public class Mitarbeiter
     {
         public string Kürzel { get; set; }

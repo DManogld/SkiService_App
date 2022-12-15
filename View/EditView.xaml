@@ -10,9 +10,10 @@
         Title="EditView"
         Height="520"
         Width="350"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
-        <vm:MainWindowViewModel />
+        <vm:EditViewModel />
     </Window.DataContext>
     <Grid>
         <StackPanel>
@@ -98,7 +99,7 @@
                            HorizontalAlignment="Left"
                            Margin="9,0,0,0"
                            VerticalAlignment="Bottom" />
-                    <Label Content="Email:"
+                    <Label Content="Status:"
                            Grid.Row="2"
                            HorizontalAlignment="Left"
                            Margin="3,0,0,0"
@@ -106,16 +107,19 @@
 
                     <ComboBox Margin="10,0,0,0"
                               Grid.Row="1"
-                              VerticalAlignment="Top" />
+                              VerticalAlignment="Top" 
+                              Text="{Binding CurentClient.FacilityName}"/>
                     <ComboBox Grid.Column="1"
                               HorizontalAlignment="Left"
                               Margin="15,0,0,0"
                               Grid.Row="1"
+                              Text="{Binding CurentClient.PriorityName}"
                               VerticalAlignment="Top"
                               Width="139" />
                     <ComboBox Margin="10,0,0,0"
                               Grid.Row="3"
-                              VerticalAlignment="Top" />
+                              VerticalAlignment="Top"
+                              Text="{Binding CurentClient.StatusName}"/>
                     <Label Grid.Column="1"
                            Content="Erstellungsdatum"
                            HorizontalAlignment="Left"
@@ -127,7 +131,8 @@
                                 Margin="14,0,0,0"
                                 Grid.Row="3"
                                 VerticalAlignment="Top"
-                                Width="140" />
+                                Width="140" 
+                                SelectedDate="{Binding CurentClient.CreateDate}"/>
                     <Label Grid.Column="1"
                            Content="Abholdatum"
                            HorizontalAlignment="Left"
@@ -140,8 +145,9 @@
                                 Grid.Row="4"
                                 VerticalAlignment="Top"
                                 Grid.RowSpan="2"
-                                Width="140" />
-                    <Label Content="Label"
+                                Width="140" 
+                                SelectedDate="{Binding CurentClient.PickupDate}"/>
+                    <Label Content="Kommentar"
                            HorizontalAlignment="Left"
                            Margin="3,0,0,0"
                            Grid.Row="4"
@@ -150,7 +156,7 @@
                              Margin="10,40,0,0"
                              Grid.Row="4"
                              TextWrapping="Wrap"
-                             Text=""
+                             Text="{Binding CurentClient.Kommentar}"
                              VerticalAlignment="Top"
                              Width="144"
                              Grid.RowSpan="2"
@@ -164,13 +170,14 @@
                         Margin="175,0,10,0"
                         VerticalAlignment="Top"
                         Grid.Column="0"
-                        Command="{Binding CmdSave}" />
+                        Command="{Binding CmdEdit}" />
                 <Button Content="Abbrechen"
                         Width="75"
                         HorizontalAlignment="Right"
                         Margin="0,0,0,0"
                         VerticalAlignment="Top"
-                        Grid.Column="0" />
+                        Grid.Column="0"
+                        Click="Button_Click" />
             </StackPanel>
         </StackPanel>
     </Grid>

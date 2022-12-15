@@ -50,14 +50,12 @@ namespace SkiService_App.ViewModel
                 if (MessageBox.Show("Erfolgreich Angemeldet", "Anmelden?", MessageBoxButton.OK,
                   MessageBoxImage.Information) == MessageBoxResult.OK)
                 {
-                    
-                }
-                                                 
+                    CanGetData = true;
+                }                                                
             }
             else
             {
-                MessageBox.Show("Die Angaben sind Flasch");
-       
+                MessageBox.Show("Die Angaben sind Flasch", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);      
             }
         }
     }

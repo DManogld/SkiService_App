@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SkiService_App.View"
         mc:Ignorable="d"
-        Title="NewClientsView"
+        Title="Auftrag Erstellen"
         Width="444"
         SizeToContent="Height"
         ResizeMode="NoResize"
@@ -20,7 +20,9 @@
                 <MenuItem>
                 </MenuItem>
                 <MenuItem Header="File">
+                    <MenuItem Header="New" />
                     <MenuItem Header="Open" />
+                    <MenuItem Header="Add" />
                     <MenuItem Header="Close">
 
                     </MenuItem>
@@ -83,7 +85,7 @@
                                 <Label Content="{Binding CurentMitarbeiter.Kürzel}"
                                        HorizontalAlignment="Right">
                                 </Label>
-                                <Label Content="Logout"
+                                <Label Content="Login"
                                        HorizontalAlignment="Right"
                                        Cursor="Hand"
                                        Background="White"
@@ -114,26 +116,16 @@
                     <Label Content="Name:"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
-                    <Label Content="Vorname"
-                           HorizontalAlignment="Center"
-                           Grid.Row="1"
-                           VerticalAlignment="Center" />
                     <Label Content="Email:"
                            Grid.Column="2"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
                     <Label Content="Tel:"
-                           Grid.Column="2"
+                           Grid.Column="0"
                            Grid.Row="2"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
                     <TextBox Grid.Column="1"
-                             HorizontalAlignment="Center"
-                             Text="{Binding EditClient.Name}"
-                             VerticalAlignment="Center"
-                             Width="145" />
-                    <TextBox Grid.Column="1"
-                             Grid.Row="1"
                              HorizontalAlignment="Center"
                              Text="{Binding EditClient.Name}"
                              VerticalAlignment="Center"
@@ -143,12 +135,13 @@
                              Text="{Binding EditClient.EMail}"
                              VerticalAlignment="Center"
                              Width="136" />
-                    <TextBox Grid.Column="3"
+                    <TextBox Grid.Column="1"
                              Grid.Row="1"
                              HorizontalAlignment="Center"
                              Text="{Binding EditClient.Phone}"
                              VerticalAlignment="Center"
-                             Width="136" />
+                             Width="136"
+                             PreviewTextInput="NumberValidationTextBox" />
                 </Grid>
             </GroupBox>
             <GroupBox Height="261"
@@ -274,7 +267,8 @@
                         Margin="230,0,0,0"
                         VerticalAlignment="Top"
                         Grid.Column="0"
-                        Command="{Binding CmdSave}" />
+                        Command="{Binding CmdSave}"
+                        Click="Button_Click" />
                 <Button Content="Abbrechen"
                         Width="85"
                         HorizontalAlignment="Right"

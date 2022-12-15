@@ -16,6 +16,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using LoginView = SkiService_App.View.LoginView;
 
 namespace SkiService_App.ViewModel
@@ -33,8 +35,8 @@ namespace SkiService_App.ViewModel
         private RelayCommand _cmdhinzufügen { get; set; }
         public RelayCommand _cmddelete { get; set; }
         public RelayCommand _cmdedit { get; set; }
-
-
+        public RelayCommand _cmdsave { get; set; }
+        
         public bool CanGetData = false;
 
         public ObservableCollection<Client> cli { get; set; } = new ObservableCollection<Client>();
@@ -44,9 +46,10 @@ namespace SkiService_App.ViewModel
         public MainWindowViewModel()
         {
             _cmdedit = new RelayCommand(param => Edit());
+            _cmdsave = new RelayCommand(param => Save(), param => CantChange());
             _cmdhinzufügen = new RelayCommand(param => Insert());
             _cmdaktualisieren = new RelayCommand(param => Refresh());
-            _cmddelete = new RelayCommand(param => Delete(), param => CanDelete()) ;
+            _cmddelete = new RelayCommand(param => Delete(), param => CantChange()) ;
         }
 
 
@@ -73,6 +76,13 @@ namespace SkiService_App.ViewModel
             get { return _cmdedit; }
             set { _cmdedit = value; }
         }
+
+        public RelayCommand CmdSave
+        {
+            get { return _cmdsave; }
+            set { _cmdsave = value; }
+        }
+
 
         public ObservableCollection<Client> ClientModel
         {
@@ -134,16 +144,38 @@ namespace SkiService_App.ViewModel
 
         private void Edit()
         {
-            EditView editView = new EditView();
-            editView.ShowDialog();
+      
+           
+        }
+      
+        private async void Save()
+        {
+            
+            if (CurentClient.ClientID != 0)
+            {
+                if (MessageBox.Show($"Wollen sie deisen Client:{CurentClient.Name} wüglich ändern?", "Ändern?", MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                   
+                    string url = $"https://localhost:7113/Registration/{CurentClient.ClientID}";
+                    var client = new RestClient(url);
+                    var request = new RestRequest().AddBody(CurentClient);
+                    request.AddHeader("apiKey", "hL4bA4nB4yI0vI0fC8fH7eT6");
+                    var response = await client.PutAsync(request);
+
+                    MessageBox.Show($"Eintrag mit der id {CurentClient.ClientID} wurde geeändert", "Änderung", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Refresh();
+                }
+            }
         }
 
         private async void Delete()
         {
-            if (MessageBox.Show("Wollen sie deisen Client wüglich löschen?", "Löschen?", MessageBoxButton.YesNo,
-                  MessageBoxImage.Question) == MessageBoxResult.Yes)
+            
+            if (CurentClient.ClientID != 0)
             {
-                if (CurentClient.ClientID != 0)
+                if (MessageBox.Show("Wollen sie deisen Client wüglich löschen?", "Löschen?", MessageBoxButton.YesNo,
+                  MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     string url = $"https://localhost:7113/Registration/{CurentClient.ClientID}";
                     var client = new RestClient(url);
@@ -154,9 +186,13 @@ namespace SkiService_App.ViewModel
                     Refresh();
                 }
             }
+            else
+            {
+                
+            }
         }
 
-        private bool CanDelete()
+        private bool CantChange()
         {
             return CurentClient != null;
         }

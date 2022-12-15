@@ -13,7 +13,8 @@ namespace SkiService_App.ViewModel
         public Client _curentClient = new Client();
         public Client _editClent = new Client();
         private RelayCommand _cmdSave { get; set; }
-        private MainWindowViewModel mnvm = new MainWindowViewModel();
+        private MainWindowViewModel mwvm = new MainWindowViewModel();
+        
         public EditViewModel()
         {
             _cmdSave = new RelayCommand(param => Save());
@@ -21,11 +22,11 @@ namespace SkiService_App.ViewModel
 
         public Client CurentClient
         {
-            get { return _curentClient; }
+            get { return mwvm.CurentClient; }
             set
             {
                 SetProperty<Client>(ref _curentClient, value);
-                EditClient = _curentClient;
+                EditClient = mwvm.CurentClient;
             }
         }
 

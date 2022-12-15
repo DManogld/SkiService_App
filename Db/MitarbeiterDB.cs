@@ -9,6 +9,10 @@ namespace SkiService_App.Db
 {
     public class MitarbeiterDB
     {
+        /// <summary>
+        /// Mitarbeiter Liste ( welche als DB deint)
+        /// </summary>
+        /// <returns></returns>
         public static List<Mitarbeiter> GetMitarbeiter()
         {
             List<Mitarbeiter> mitarbeiters = new List<Mitarbeiter>()

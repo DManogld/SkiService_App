@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="LoginView" Height="400" Width="450"
         MouseDown="Window_MouseDown"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:LoginViewModel/>
@@ -67,7 +68,8 @@
                 Content="Login"
                 HorizontalAlignment="Center"
                 Width="80"
-                Margin="0,20,0,0">
+                Margin="0,20,0,0"
+                    Click="Button_Click">
                 
             </Button>
         </StackPanel>

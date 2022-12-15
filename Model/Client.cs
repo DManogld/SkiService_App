@@ -10,6 +10,9 @@ using System.Windows.Controls;
 
 namespace SkiService_App.Model
 {
+    /// <summary>
+    /// Client Model hier werden alle eigenschaften von einem Client aufgelistet
+    /// </summary>
     public class Client: ViewModelBase
     {
         private int _clientID;

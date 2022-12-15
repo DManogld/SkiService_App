@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SkiService_App.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,16 @@ namespace SkiService_App.View
             {
                 DragMove();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginViewModel lv = new LoginViewModel();
+            if(lv.CanGetData == true)
+            {
+                Close();
+            }
+            
         }
     }
 }
