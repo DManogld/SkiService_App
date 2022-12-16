@@ -6,10 +6,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SkiService_App.View"
         mc:Ignorable="d"
-        Title="LoginView" Height="400" Width="450"
+        Title="LoginView" Height="450" Width="450"
         MouseDown="Window_MouseDown"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        x:Name="LoginWindow">
     <Window.DataContext>
         <vm:LoginViewModel/>
     </Window.DataContext>
@@ -63,14 +64,20 @@
                                 ViewportUnits="RelativeToBoundingBox"></ImageBrush>
                 </TextBox.Background>
             </TextBox>
-            <Button
-                Command="{Binding Login}"
-                Content="Login"
-                HorizontalAlignment="Center"
-                Width="80"
-                Margin="0,20,0,0"
+            
+            <!--Dieser Knopf wurde mit code Behind programiert umd das fenster zu schlisssen.-->
+            <Button Command="{Binding Login}"
+                    Content="Login"
+                    HorizontalAlignment="Center"
+                    Width="80"
+                    Margin="0,20,0,0">
+            </Button>
+            <Button 
+                    Content="Abbrechen"
+                    HorizontalAlignment="Center"
+                    Width="80"
+                    Margin="0,10,0,0"
                     Click="Button_Click">
-                
             </Button>
         </StackPanel>
     </Grid>

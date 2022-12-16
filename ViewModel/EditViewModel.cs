@@ -10,10 +10,13 @@ namespace SkiService_App.ViewModel
 {
     public class EditViewModel : ViewModelBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public Client _curentClient = new Client();
         public Client _editClent = new Client();
         private RelayCommand _cmdSave { get; set; }
-        private MainWindowViewModel mwvm = new MainWindowViewModel();
+        private AuftragVerwaltenViewModel mwvm = new AuftragVerwaltenViewModel();
         
         public EditViewModel()
         {

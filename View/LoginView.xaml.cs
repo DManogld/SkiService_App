@@ -1,4 +1,5 @@
-﻿using SkiService_App.ViewModel;
+﻿using Newtonsoft.Json.Linq;
+using SkiService_App.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,15 @@ namespace SkiService_App.View
     /// </summary>
     public partial class LoginView : Window
     {
+        private string value;
+
         public LoginView()
         {
             InitializeComponent();
+            LoginViewModel lw = new LoginViewModel();
+            DataContext = lw;
+            if( lw.CloseAction == null)
+                lw.CloseAction = new Action(() => this.Close());
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -35,12 +42,8 @@ namespace SkiService_App.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            LoginViewModel lv = new LoginViewModel();
-            if(lv.CanGetData == true)
-            {
-                Close();
-            }
-            
+            Close();
         }
+
     }
 }

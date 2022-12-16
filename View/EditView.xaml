@@ -6,8 +6,9 @@
         xmlns:vm="clr-namespace:SkiService_App.ViewModel"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         x:Class="SkiService_App.View.EditView"
+        Icon="/image/icons8-edit-file-80.png"
         mc:Ignorable="d"
-        Title="EditView"
+        Title="Autrag Bearbeiten"
         Height="520"
         Width="350"
         ResizeMode="NoResize"
@@ -16,8 +17,8 @@
         <vm:EditViewModel />
     </Window.DataContext>
     <Grid>
-        <StackPanel>
-            <Label Content="Mandant bearbeiten"
+        <StackPanel Background="#FFB0D9FF">
+            <Label Content="Auftrag bearbeiten"
                    FontWeight="Bold"
                    FontSize="20"
                    Margin="0,0,0,20" />
@@ -108,7 +109,15 @@
                     <ComboBox Margin="10,0,0,0"
                               Grid.Row="1"
                               VerticalAlignment="Top" 
-                              Text="{Binding CurentClient.FacilityName}"/>
+                              Text="{Binding CurentClient.FacilityName}">
+                        <ComboBox.Background>
+                            <LinearGradientBrush EndPoint="0,1">
+                                <GradientStop Color="#FFF0F0F0" />
+                                <GradientStop Color="#FFB97070"
+                                              Offset="1" />
+                            </LinearGradientBrush>
+                        </ComboBox.Background>
+                    </ComboBox>
                     <ComboBox Grid.Column="1"
                               HorizontalAlignment="Left"
                               Margin="15,0,0,0"

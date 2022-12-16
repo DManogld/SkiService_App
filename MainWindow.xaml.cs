@@ -25,21 +25,5 @@ namespace SkiService_App
         {
             InitializeComponent();       
         }
-
-        private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void item1_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void item9_Click(object sender, RoutedEventArgs e)
-        {
-            LoginView lw = new LoginView();
-            lw.ShowDialog();
-        }
     }
 }

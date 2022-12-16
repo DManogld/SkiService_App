@@ -16,43 +16,6 @@
     </Window.DataContext>
     <Grid>
         <StackPanel>
-            <Menu>
-                <MenuItem>
-                </MenuItem>
-                <MenuItem Header="File">
-                    <MenuItem Header="New" />
-                    <MenuItem Header="Open" />
-                    <MenuItem Header="Add" />
-                    <MenuItem Header="Close">
-
-                    </MenuItem>
-                    <Separator></Separator>
-                    <MenuItem x:Name="CLOSE"
-                              Header="Exit">
-
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="Edit">
-                    <MenuItem Header="Copy"
-                              Command="ApplicationCommands.Copy" />
-                    <MenuItem Header="Paste"
-                              Command="ApplicationCommands.Paste" />
-                </MenuItem>
-                <MenuItem Header="View">
-                    <MenuItem Header="Bold"
-                              IsCheckable="True"
-                              InputGestureText="Ctrl+B" />
-                    <MenuItem Header="Italic"
-                              IsCheckable="True"
-                              InputGestureText="Ctrl+I" />
-                </MenuItem>
-                <MenuItem Header="Help">
-                    <MenuItem Header="About">
-                        <MenuItem Header="Sub Menu" />
-                        <MenuItem Header="Sub Menu Item" />
-                    </MenuItem>
-                </MenuItem>
-            </Menu>
             <DockPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -63,39 +26,20 @@
                            FontWeight="Bold"
                            FontSize="24"
                            Height="42" 
+                           HorizontalAlignment="Center"
                            Margin="10,0,0,0"/>
                     <DockPanel
                         Grid.Column="1">
-                    <Button   
-                            DockPanel.Dock="Right"
-                            Height="46"
-                            Background="Transparent"
-                            HorizontalAlignment="Right"
-                            Margin="0,0,10,0"
-                            VerticalAlignment="Top"
-                            Cursor="Hand"
-                        Command="{Binding CmdMitarbeiter}">
-                        <Image Source="/image/icons8-Login.png"></Image>
-                    </Button>
-                        <Grid 
-                            DockPanel.Dock="Right"
-                            Width="50"
-                            HorizontalAlignment="Right">
-                            <StackPanel Orientation="Vertical">
-                                <Label Content="{Binding CurentMitarbeiter.Kürzel}"
-                                       HorizontalAlignment="Right">
-                                </Label>
-                                <Label Content="Login"
-                                       HorizontalAlignment="Right"
-                                       Cursor="Hand"
-                                       Background="White"
-                                       MouseDown="Label_MouseDown"
-                                       FontWeight="Bold"
-                                       Foreground="#FF1856ED" />
-
-
-                            </StackPanel>
-                        </Grid>
+                        <Button DockPanel.Dock="Right"
+                                Height="46"
+                                Background="Transparent"
+                                HorizontalAlignment="Right"
+                                Margin="0,0,10,0"
+                                VerticalAlignment="Top"
+                                Cursor="Hand"
+                                Command="{Binding CmdMitarbeiter}">
+                            <Image Source="/image/icons8-Login.png"></Image>
+                        </Button>
                     </DockPanel>
                 </Grid>
             </DockPanel>
@@ -129,18 +73,21 @@
                              HorizontalAlignment="Center"
                              Text="{Binding EditClient.Name}"
                              VerticalAlignment="Center"
-                             Width="145" />
+                             Width="145"
+                             Height="20" />
                     <TextBox Grid.Column="3"
                              HorizontalAlignment="Center"
                              Text="{Binding EditClient.EMail}"
                              VerticalAlignment="Center"
-                             Width="136" />
+                             Width="136"
+                             Height="20"/>
                     <TextBox Grid.Column="1"
                              Grid.Row="1"
                              HorizontalAlignment="Center"
                              Text="{Binding EditClient.Phone}"
                              VerticalAlignment="Center"
-                             Width="136"
+                             Width="145"
+                             Height="20"
                              PreviewTextInput="NumberValidationTextBox" />
                 </Grid>
             </GroupBox>
@@ -205,7 +152,7 @@
                               Width="200"
                               Text="{Binding EditClient.FacilityName}">
                         <ComboBoxItem>Kleiner Service</ComboBoxItem>
-                        <ComboBoxItem>Grosse Service</ComboBoxItem>
+                        <ComboBoxItem>Grosser Service</ComboBoxItem>
                         <ComboBoxItem>Rennski Service</ComboBoxItem>
                         <ComboBoxItem>Bindung montieren und eistellen</ComboBoxItem>
                         <ComboBoxItem>Fell zuschneiden</ComboBoxItem>
@@ -230,7 +177,6 @@
                               Text="{Binding EditClient.StatusName}">
                         <ComboBoxItem IsSelected="True">Offen</ComboBoxItem>
                         <ComboBoxItem>In Bearbeitung</ComboBoxItem>
-                        <ComboBoxItem>Abgeschlossen</ComboBoxItem>
                     </ComboBox>
 
                     <DatePicker Grid.Column="1"
@@ -305,31 +251,49 @@
                                     Orientation="Vertical">
                             <TextBox Height="26"
                                      Margin="0,0,10,0"
-                                     Text="{Binding EditClient.Name}" />
+                                     Text="{Binding EditClient.Name}"
+                                     IsReadOnly="True"
+                                     BorderThickness="0,0,0,1" />
                             <TextBox Height="26"
                                      Margin="0,0,10,0"
-                                     Text="{Binding EditClient.EMail}" />
+                                     Text="{Binding EditClient.EMail}"
+                                     IsReadOnly="True"
+                                     BorderThickness="0,0,0,1" />
                             <TextBox Height="26"
                                      Margin="0,0,10,0"
-                                     Text="{Binding EditClient.Phone}" />
+                                     Text="{Binding EditClient.Phone}"
+                                     IsReadOnly="True"
+                                     BorderThickness="0,0,0,1"/>
                             <TextBox Height="26"
                                      Margin="0,0,10,0"
-                                     Text="{Binding EditClient.FacilityName}" />
+                                     Text="{Binding EditClient.FacilityName}"
+                                     IsReadOnly="True"
+                                     BorderThickness="0,0,0,1" />
                             <TextBox Height="26"
                                      Margin="0,0,10,0"
-                                     Text="{Binding EditClient.PriorityName}" />
+                                     Text="{Binding EditClient.PriorityName}"
+                                     IsReadOnly="True"
+                                     BorderThickness="0,0,0,1" />
                             <TextBox Height="26"
                                      Margin="0,0,10,0"
-                                     Text="{Binding EditClient.StatusName}" />
+                                     Text="{Binding EditClient.StatusName}"
+                                     IsReadOnly="True"
+                                     BorderThickness="0,0,0,1" />
                             <TextBox Height="26"
                                      Margin="0,0,10,0"
-                                     Text="{Binding EditClient.CreateDate}" />
+                                     Text="{Binding EditClient.CreateDate}"
+                                     IsReadOnly="True"
+                                     BorderThickness="0,0,0,1" />
                             <TextBox Height="26"
                                      Margin="0,0,10,0"
-                                     Text="{Binding EditClient.PickupDate}" />
+                                     Text="{Binding EditClient.PickupDate}"
+                                     IsReadOnly="True"
+                                     BorderThickness="0,0,0,1" />
                             <TextBox Height="26"
                                      Margin="0,0,10,0"
-                                     Text="{Binding EditClient.Kommentar}" />
+                                     Text="{Binding EditClient.Kommentar}"
+                                     IsReadOnly="True"
+                                     BorderThickness="0,0,0,1" />
 
                         </StackPanel>
                     </Grid>

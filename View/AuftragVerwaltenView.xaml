@@ -1,0 +1,339 @@
+﻿<Window x:Class="SkiService_App.View.AuftragVerwaltenView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:SkiService_App.ViewModel"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:SkiService_App.View"
+        mc:Ignorable="d"
+        Title="AuftragVerwaltenView"
+        Height="720"
+        Width="1080"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="Height"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <vm:AuftragVerwaltenViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <Ribbon DockPanel.Dock="Top"
+                    Margin="0, -22,0,0"
+                    VerticalAlignment="Top">
+                <Ribbon.ApplicationMenu>
+                    <RibbonApplicationMenu >
+                        <RibbonApplicationMenu.AuxiliaryPaneContent>
+                            <RibbonGallery ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <RibbonGalleryCategory MaxColumnCount="1">
+                                    <RibbonGalleryItem x:Name="item5"
+                                                       Content="Nocksoft"
+                                                       MouseOverBackground="Transparent"
+                                                       MouseOverBorderBrush="Transparent"
+                                                       CheckedBackground="Transparent"
+                                                       CheckedBorderBrush="Transparent" />
+                                    <RibbonGalleryItem />
+                                </RibbonGalleryCategory>
+                            </RibbonGallery>
+                        </RibbonApplicationMenu.AuxiliaryPaneContent>
+                        <RibbonApplicationMenuItem x:Name="item1"
+                                                   Header="Hinzufügen"                                                  
+                                                   Click="item1_Click" />
+                        <RibbonApplicationMenuItem x:Name="item4"
+                                                   Header="Einstellungen"
+                                                   ImageSource="/image/icons8-settings-24.png" />
+                        <RibbonApplicationMenuItem x:Name="item9"
+                                                   Header="Logout"
+                                                   ImageSource="/image/icons8-Login.png"
+                                                   Click="item9_Click" />
+                    </RibbonApplicationMenu>
+                </Ribbon.ApplicationMenu>
+                <RibbonTab x:Name="tab1"
+                           Header="Verwalten"
+                           Height="80"
+                           VerticalAlignment="Top">
+                    <RibbonGroup x:Name="gruppe1">
+                        <RibbonButton x:Name="btn1"
+                                      Label="Neu.."
+                                      LargeImageSource="/image/icons8-add-new-30.png"
+                                      Height="54"
+                                      Width="49"
+                                      Command="{Binding Hinzufügen}">
+                            <Button.ToolTip>
+                                <ToolTip>
+
+                                    <TextBlock>Neuen Auftrag erstellen..</TextBlock>
+                                </ToolTip>
+                             </Button.ToolTip>
+                        </RibbonButton>
+                        <RibbonButton x:Name="btn3"
+                                      Label="Akktualisieren"
+                                      Command="{Binding Aktualisieren}"
+                                      LargeImageSource="/image/pfeile-aktualisieren.png">
+                            <Button.ToolTip>
+                                <ToolTip>
+
+                                    <TextBlock>Akktualisiere die Tabelle...</TextBlock>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </RibbonButton>
+
+                    </RibbonGroup>
+                    <RibbonGroup x:Name="gruppe2">
+                        <RibbonButton x:Name="btn2"
+                                      Label="Speichern"
+                                      LargeImageSource="/image/icons8-save-30.png"
+                                      Command="{Binding CmdSave}">
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <TextBlock>Speichere der bearbeiteten Auftrag...</TextBlock>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </RibbonButton>
+                        <RibbonButton x:Name="btn4"
+                                      Label="Löschen"
+                                      LargeImageSource="/image/icons8-trash-can-50.png"
+                                      Command="{Binding CmdDelete}">
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <TextBlock>SLöscht den ausgewählten Auftrag...</TextBlock>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </RibbonButton>
+
+                    </RibbonGroup>
+                </RibbonTab>
+            </Ribbon>
+        </DockPanel>
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Grid.Row="1"
+                         Text="{Binding Filters.Filters}"
+                         Height="25"
+                         HorizontalAlignment="Left"
+                         Margin="0,0,0,0"
+                         Width="264"
+                         FontSize="16"
+                         BorderThickness="1,1,1,1"
+                         Background="#FFE4F0FF" />
+                <Button Background="#FFD6D6D6"
+                        Height="25"
+                        Width="25"
+                        Command="{Binding CmdFilter}">
+                    <Image Source="/image/loupe.png"/>
+                    <Button.ToolTip>
+                        <ToolTip>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold">Suchen X</TextBlock>
+                                <TextBlock>Den inhalt der Tabelle suchen</TextBlock>
+                            </StackPanel>
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+            <DataGrid x:Name="data_Grit"
+                      ItemsSource="{Binding cli}"
+                      AutoGenerateColumns="False"
+                      CanUserResizeColumns="True"
+                      SelectedItem="{Binding CurentClient}"
+                      Height="400">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id"
+                                        Binding="{Binding ClientID}"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="Name"
+                                        Binding="{Binding Name}"
+                                        Stylus.IsTouchFeedbackEnabled="True"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="E-Mail"
+                                        Binding="{Binding EMail}"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="Phone"
+                                        Binding="{Binding Phone}"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="CreateDate"
+                                        IsReadOnly="True"
+                                        Binding="{Binding CreateDate}" />
+                    <DataGridTextColumn Header="PickupDate"
+                                        IsReadOnly="True"
+                                        Binding="{Binding PickupDate}" />
+                    <DataGridTextColumn Header="FacilityName"
+                                        Binding="{Binding FacilityName}"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="PriorityName"
+                                        Binding="{Binding PriorityName}"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="StatusName"
+                                        Binding="{Binding StatusName}"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="Kommentar"
+                                        Binding="{Binding Kommentar}"
+                                        IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <GroupBox Header="Auftrag bearbeiten"
+                  Grid.Row="2"
+                  FontWeight="Bold">
+            <Expander Header="Klicken Sie hier, um ihre eingaben anzuzeigen/auszublenden..."
+                      IsExpanded="False"
+                      ExpandDirection="Down"
+                      x:Name="Expender"
+                      FontWeight="Normal">
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Name:"
+                           HorizontalAlignment="Left"
+                           Margin="54,0,0,0"
+                           VerticalAlignment="Center"
+                           Grid.ColumnSpan="2" />
+                    <TextBox Grid.Column="1"
+                             HorizontalAlignment="Left"
+                             Margin="5,0,0,0"
+                             TextWrapping="Wrap"
+                             Text="{Binding CurentClient.Name}"
+                             VerticalAlignment="Center"
+                             Width="130" />
+                    <TextBox Grid.Column="1"
+                             Grid.Row="1"
+                             HorizontalAlignment="Left"
+                             Margin="5,0,0,0"
+                             TextWrapping="Wrap"
+                             Text="{Binding CurentClient.Phone}"
+                             VerticalAlignment="Center"
+                             Width="130" />
+                    <TextBox Grid.Column="1"
+                             Grid.Row="2"
+                             HorizontalAlignment="Left"
+                             Margin="5,0,0,0"
+                             TextWrapping="Wrap"
+                             Text="{Binding CurentClient.EMail}"
+                             VerticalAlignment="Center"
+                             Width="130" />
+                    <Label Content="Tel.:"
+                           HorizontalAlignment="Left"
+                           Margin="54,0,0,0"
+                           Grid.Row="1"
+                           VerticalAlignment="Center" />
+                    <Label Content="Email:"
+                           HorizontalAlignment="Left"
+                           Margin="54,0,0,0"
+                           Grid.Row="2"
+                           VerticalAlignment="Center" />
+                    <Label Grid.Column="2"
+                           Content="Dienstleitung:"
+                           HorizontalAlignment="left"
+                           Margin="20,0,0,0"
+                           VerticalAlignment="Center" />
+                    <Label Grid.Column="2"
+                           Grid.Row="1"
+                           Content="Priorität:"
+                           HorizontalAlignment="Left"
+                           Margin="20,0,0,0"
+                           VerticalAlignment="Center" />
+                    <Label Grid.Column="2"
+                           Grid.Row="2"
+                           Content="Status:"
+                           HorizontalAlignment="Left"
+                           Margin="20,0,0,0"
+                           VerticalAlignment="Center" />
+                    <ComboBox Grid.Column="3"
+                              HorizontalAlignment="Left"
+                              Margin="0,0,0,0"
+                              VerticalAlignment="Center"
+                              Width="150"
+                              Text="{Binding CurentClient.FacilityName}">
+                        <ComboBoxItem>Kleiner Service</ComboBoxItem>
+                        <ComboBoxItem>Grosse Service</ComboBoxItem>
+                        <ComboBoxItem>Rennski Service</ComboBoxItem>
+                        <ComboBoxItem>Bindung montieren und eistellen</ComboBoxItem>
+                        <ComboBoxItem>Fell zuschneiden</ComboBoxItem>
+                        <ComboBoxItem>Heisswachsen</ComboBoxItem>
+                        <ComboBoxItem>Kleine Dienste</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox Grid.Column="3"
+                              Grid.Row="1"
+                              HorizontalAlignment="Left"
+                              Margin="0,0,0,0"
+                              VerticalAlignment="Center"
+                              Width="150"
+                              Text="{Binding EditClient.PriorityName}">
+                        <ComboBoxItem>Niedrig</ComboBoxItem>
+                        <ComboBoxItem IsSelected="True">Mittel</ComboBoxItem>
+                        <ComboBoxItem>Hoch</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox Grid.Column="3"
+                              Grid.Row="2"
+                              HorizontalAlignment="Left"
+                              Margin="0,0,0,0"
+                              VerticalAlignment="Center"
+                              Width="150"
+                              Text="{Binding CurentClient.StatusName}">
+                        <ComboBoxItem IsSelected="True">Offen</ComboBoxItem>
+                        <ComboBoxItem>In Bearbeitung</ComboBoxItem>
+                        <ComboBoxItem>Abgeschlossen</ComboBoxItem>
+                    </ComboBox>
+                    <Label Grid.Column="4"
+                           Content="Erstellungsdatum:"
+                           HorizontalAlignment="Left"
+                           Margin="2,0,0,0"
+                           VerticalAlignment="Center" />
+                    <Label Grid.Column="4"
+                           Grid.Row="1"
+                           Content="Abholdatum:"
+                           HorizontalAlignment="Left"
+                           Margin="2,0,0,0"
+                           VerticalAlignment="Center" />
+                    <Label Grid.Column="4"
+                           Grid.Row="2"
+                           Content="Kommentar:"
+                           HorizontalAlignment="Left"
+                           Margin="2,0,0,0"
+                           VerticalAlignment="Center" />
+                    <DatePicker Grid.Column="5"
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,0"
+                                VerticalAlignment="Center"
+                                Width="160"
+                                SelectedDate="{Binding CurentClient.CreateDate}" />
+                    <DatePicker Grid.Column="5"
+                                Grid.Row="1"
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,0"
+                                VerticalAlignment="Center"
+                                Width="160"
+                                SelectedDate="{Binding CurentClient.PickupDate}" />
+                    <TextBox Grid.Column="5"
+                             HorizontalAlignment="Left"
+                             Margin="0,0,0,0"
+                             Grid.Row="2"
+                             TextWrapping="Wrap"
+                             Text="{Binding CurentClient.Kommentar}"
+                             VerticalAlignment="Center"
+                             Width="160" />
+                </Grid>
+
+            </Expander>
+        </GroupBox>
+
+    </Grid>
+</Window>

@@ -1,4 +1,5 @@
 ﻿using SkiService_App.Model;
+using SkiService_App.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace SkiService_App.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            
             Close();
         }
 
@@ -64,5 +65,7 @@ namespace SkiService_App.View
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+
     }
 }

@@ -111,13 +111,18 @@
       <DependentUpon>FlowTabelle.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\Filter.cs" />
     <Compile Include="Model\Mitarbeiter.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
+    <Compile Include="ViewModel\AuftragVerwaltenViewModel.cs" />
     <Compile Include="ViewModel\EditViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\NewClientViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\AuftragVerwaltenView.xaml.cs">
+      <DependentUpon>AuftragVerwaltenView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditView.xaml.cs">
       <DependentUpon>EditView.xaml</DependentUpon>
     </Compile>
@@ -155,6 +160,10 @@
     <Page Include="Resources\IconsNonShared.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AuftragVerwaltenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditView.xaml">
       <SubType>Designer</SubType>
@@ -234,6 +243,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="image\key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\loupe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\pfeile-aktualisieren.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\005-ski.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\ski.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\Presentation-2021-271-1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
