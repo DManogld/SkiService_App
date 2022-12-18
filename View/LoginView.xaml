@@ -23,7 +23,7 @@
                    FontWeight="Bold">
             </Label>
 
-            <TextBlock Text="Melden Sie sich an mit ihre Initialen und mir der API Key."
+            <TextBlock Text="Melden Sie sich an mit ihre Initialen und ihr Password."
                        HorizontalAlignment="Center"
                        Width="200"
                        TextWrapping="WrapWithOverflow"
@@ -56,7 +56,9 @@
                 Margin="150,0,150,0"
                 Height="20"
                 Padding="20,0,0,0"
-                Text="{Binding CurentMitarbeiter.ApiKey}">
+                Text="{Binding CurentMitarbeiter.Passwort, UpdateSourceTrigger=PropertyChanged}"
+                >
+                
                 <TextBox.Background>
                     <ImageBrush ImageSource="/image/key.png"
                                 Stretch="None"
@@ -72,8 +74,7 @@
                     Width="80"
                     Margin="0,20,0,0">
             </Button>
-            <Button 
-                    Content="Abbrechen"
+            <Button Content="Abbrechen"
                     HorizontalAlignment="Center"
                     Width="80"
                     Margin="0,10,0,0"

@@ -17,7 +17,6 @@ namespace SkiService_App.ViewModel
     public class AuftragVerwaltenViewModel : ViewModelBase
     {
         #region "Variablen Inizialisieren"
-        public Database db = new Database();
         public Client _editClent = new Client();
         public Client _curentClient = new Client();
         private Filter _filter = new Filter();
@@ -152,7 +151,6 @@ namespace SkiService_App.ViewModel
                 SetProperty<Filter>(ref _filter, value);
             }
         }
-
         #region "Methoden"
         /// <summary>
         /// Mothode um die Datagrid zu Akktualisieren und HTTP Get() macht.
@@ -177,33 +175,30 @@ namespace SkiService_App.ViewModel
         }
 
         /// <summary>
-        /// Methode welche ein neues Dialogfenster aufmacht. (NewClientView)
-        /// </summary>
-        private async void Insert()
-        {
-            NewClientsView newClient = new NewClientsView();
-            newClient.ShowDialog();
-        }
-
-        /// <summary>
         ///  Methode welche HTTP PUT Request ausführt
         /// </summary>
         private async void Save()
         {
-
-            if (CurentClient.ClientID != 0)
+            try
             {
-                if (MessageBox.Show($"Wollen sie den Auftrag mit der ID :{CurentClient.ClientID} wüglich ändern?", "Ändern?", MessageBoxButton.YesNo,
-                    MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (CurentClient.ClientID != 0)
                 {
-                    string url = $"https://localhost:7113/Registration/{CurentClient.ClientID}";
-                    var client = new RestClient(url);
-                    var request = new RestRequest().AddBody(CurentClient);
-                    request.AddHeader("apiKey", "hL4bA4nB4yI0vI0fC8fH7eT6");
-                    var response = await client.PutAsync(request);
-                    MessageBox.Show($"Eintrag mit der id {CurentClient.ClientID} wurde geändert", "Änderung", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Refresh();
+                    if (MessageBox.Show($"Wollen sie den Auftrag mit der ID :{CurentClient.ClientID} wüglich ändern?", "Ändern?", MessageBoxButton.YesNo,
+                        MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        string url = $"https://localhost:7113/Registration/{CurentClient.ClientID}";
+                        var client = new RestClient(url);
+                        var request = new RestRequest().AddBody(CurentClient);
+                        request.AddHeader("apiKey", "hL4bA4nB4yI0vI0fC8fH7eT6");
+                        var response = await client.PutAsync(request);
+                        MessageBox.Show($"Eintrag mit der id {CurentClient.ClientID} wurde geändert", "Änderung", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Refresh();
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Hola, da ist was schief gelaufen: ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -213,20 +208,37 @@ namespace SkiService_App.ViewModel
         /// </summary>
         private async void Delete()
         {
-            if (CurentClient.ClientID != 0)
+            try
             {
-                if (MessageBox.Show("Wollen sie deisen Client wüglich löschen?", "Löschen?", MessageBoxButton.YesNo,
-                  MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (CurentClient.ClientID != 0)
                 {
-                    string url = $"https://localhost:7113/Registration/{CurentClient.ClientID}";
-                    var client = new RestClient(url);
-                    var request = new RestRequest();
-                    request.AddHeader("apiKey", "hL4bA4nB4yI0vI0fC8fH7eT6");
-                    var response = await client.DeleteAsync(request);
-                    MessageBox.Show($"Eintrag mit der id {CurentClient.ClientID} wurde gelöscht", "Löschen", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Refresh();
+                    if (MessageBox.Show("Wollen sie deisen Client wüglich löschen?", "Löschen?", MessageBoxButton.YesNo,
+                      MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        string url = $"https://localhost:7113/Registration/{CurentClient.ClientID}";
+                        var client = new RestClient(url);
+                        var request = new RestRequest();
+                        request.AddHeader("apiKey", "hL4bA4nB4yI0vI0fC8fH7eT6");
+                        var response = await client.DeleteAsync(request);
+                        MessageBox.Show($"Eintrag mit der id {CurentClient.ClientID} wurde gelöscht", "Löschen", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Refresh();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hola, da ist was schief gelaufen: ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
+        /// <summary>
+        /// Methode welche ein neues Dialogfenster aufmacht. (NewClientView)
+        /// </summary>
+        private async void Insert()
+        {
+            NewClientsView newClient = new NewClientsView();
+            newClient.ShowDialog();
         }
 
         /// <summary>
@@ -234,15 +246,22 @@ namespace SkiService_App.ViewModel
         /// </summary>
         private async void Filter()
         {
-            ObservableCollection<Client> collection = new ObservableCollection<Client>();
-            foreach (var i in ClientModel)
+            try
             {
-                if (i.FacilityName == Filters.Filters || i.Name == Filters.Filters || i.EMail == Filters.Filters || i.StatusName == Filters.Filters
-                    || i.ClientID.ToString() == Filters.Filters || i.PriorityName == Filters.Filters)
-                    collection.Add(i);
-            }
+                ObservableCollection<Client> collection = new ObservableCollection<Client>();
+                foreach (var i in ClientModel)
+                {
+                    if (i.FacilityName == Filters.Filters || i.Name == Filters.Filters || i.EMail == Filters.Filters || i.StatusName == Filters.Filters
+                        || i.ClientID.ToString() == Filters.Filters || i.PriorityName == Filters.Filters)
+                        collection.Add(i);
+                }
 
-            ClientModel = collection;
+                ClientModel = collection;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Hola, da ist was schief gelaufen: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
 

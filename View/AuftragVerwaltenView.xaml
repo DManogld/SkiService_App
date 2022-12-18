@@ -32,11 +32,13 @@
                             <RibbonGallery ScrollViewer.VerticalScrollBarVisibility="Auto">
                                 <RibbonGalleryCategory MaxColumnCount="1">
                                     <RibbonGalleryItem x:Name="item5"
-                                                       Content="Nocksoft"
+                                                       Content="Jetstream.Serviced"
+                                                       MouseDoubleClick="item5_MouseDoubleClick"
                                                        MouseOverBackground="Transparent"
                                                        MouseOverBorderBrush="Transparent"
                                                        CheckedBackground="Transparent"
-                                                       CheckedBorderBrush="Transparent" />
+                                                       CheckedBorderBrush="Transparent"
+                                                       MouseLeftButtonDown="item5_MouseLeftButtonDown" />
                                     <RibbonGalleryItem />
                                 </RibbonGalleryCategory>
                             </RibbonGallery>
@@ -59,10 +61,10 @@
                            VerticalAlignment="Top">
                     <RibbonGroup x:Name="gruppe1">
                         <RibbonButton x:Name="btn1"
-                                      Label="Neu.."
+                                      Label="Neu..."
                                       LargeImageSource="/image/icons8-add-new-30.png"
                                       Height="54"
-                                      Width="49"
+                                      Width="49"                                     
                                       Command="{Binding Hinzufügen}">
                             <Button.ToolTip>
                                 <ToolTip>
@@ -131,8 +133,8 @@
                     <Button.ToolTip>
                         <ToolTip>
                             <StackPanel>
-                                <TextBlock FontWeight="Bold">Suchen X</TextBlock>
-                                <TextBlock>Den inhalt der Tabelle suchen</TextBlock>
+                                <TextBlock FontWeight="Bold">Suchen</TextBlock>
+                                <TextBlock>Den inhalt der Tabelle durchsuchen</TextBlock>
                             </StackPanel>
                         </ToolTip>
                     </Button.ToolTip>
@@ -143,11 +145,15 @@
                       AutoGenerateColumns="False"
                       CanUserResizeColumns="True"
                       SelectedItem="{Binding CurentClient}"
-                      Height="400">
+                      Height="400"
+                      Background="#FFBCD4E3"
+                      FontSize="16"
+                      FontFamily="Arial">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id"
+                    <DataGridTextColumn Header="ChientID"
                                         Binding="{Binding ClientID}"
-                                        IsReadOnly="True" />
+                                        IsReadOnly="True"
+                                        />
                     <DataGridTextColumn Header="Name"
                                         Binding="{Binding Name}"
                                         Stylus.IsTouchFeedbackEnabled="True"
@@ -155,22 +161,22 @@
                     <DataGridTextColumn Header="E-Mail"
                                         Binding="{Binding EMail}"
                                         IsReadOnly="True" />
-                    <DataGridTextColumn Header="Phone"
+                    <DataGridTextColumn Header="Telefonnummer"
                                         Binding="{Binding Phone}"
                                         IsReadOnly="True" />
-                    <DataGridTextColumn Header="CreateDate"
+                    <DataGridTextColumn Header="Erstelldatum"
                                         IsReadOnly="True"
                                         Binding="{Binding CreateDate}" />
-                    <DataGridTextColumn Header="PickupDate"
+                    <DataGridTextColumn Header="Abholdatum"
                                         IsReadOnly="True"
                                         Binding="{Binding PickupDate}" />
-                    <DataGridTextColumn Header="FacilityName"
+                    <DataGridTextColumn Header="Dienstleistung"
                                         Binding="{Binding FacilityName}"
                                         IsReadOnly="True" />
-                    <DataGridTextColumn Header="PriorityName"
+                    <DataGridTextColumn Header="Priorität"
                                         Binding="{Binding PriorityName}"
                                         IsReadOnly="True" />
-                    <DataGridTextColumn Header="StatusName"
+                    <DataGridTextColumn Header="Status"
                                         Binding="{Binding StatusName}"
                                         IsReadOnly="True" />
                     <DataGridTextColumn Header="Kommentar"

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace SkiService_App.Model
 {
@@ -15,7 +16,7 @@ namespace SkiService_App.Model
         public string Name { get; set; }
         public int MitarbeiterNummer { get; set; }
         public string Title { get; set; }
-        public string ApiKey { get; set; }
+        public string Passwort { get; set; }
     }
 
     

@@ -22,7 +22,7 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
-                    <Label Content="Auftrag Erstellen"
+                    <Label Content="Auftrag erstellen"
                            FontWeight="Bold"
                            FontSize="24"
                            Height="42" 
@@ -214,7 +214,8 @@
                         VerticalAlignment="Top"
                         Grid.Column="0"
                         Command="{Binding CmdSave}"
-                        Click="Button_Click" />
+                        Click="Button_Click"
+                        Background="#FFF6F3F3" />
                 <Button Content="Abbrechen"
                         Width="85"
                         HorizontalAlignment="Right"

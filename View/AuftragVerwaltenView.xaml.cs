@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SkiService_App.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,16 @@ namespace SkiService_App.View
         private void item9_Click(object sender, RoutedEventArgs e)
         {
            Close();
+        }
+
+        private void item5_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void item5_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Close();
         }
     }
 }

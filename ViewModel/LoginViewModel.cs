@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.UI.WebControls;
 using System.Windows;
 
@@ -62,10 +63,11 @@ namespace SkiService_App.ViewModel
         public void Anmelden()
         {
             AuftragVerwaltenView avw = new AuftragVerwaltenView();
-            if (CurentMitarbeiter.Kürzel == "DMA" && CurentMitarbeiter.ApiKey == "hL4bA4nB4yI0vI0fC8fH7eT6" || CurentMitarbeiter.Kürzel == "SST" && CurentMitarbeiter.ApiKey == "hL4bA4nB4yI0vI0fC8fH7eT6")
+            if (CurentMitarbeiter.Kürzel == "DMA" && CurentMitarbeiter.Passwort == "pw1234" || CurentMitarbeiter.Kürzel == "SST" && CurentMitarbeiter.Passwort == "pw5678")
             {                           
-                 savw.Show();
+                 avw.Show();
                  CloseAction();
+                
             }
             else
             {

@@ -17,7 +17,7 @@
         <vm:EditViewModel />
     </Window.DataContext>
     <Grid>
-        <StackPanel Background="#FFB0D9FF">
+        <StackPanel>
             <Label Content="Auftrag bearbeiten"
                    FontWeight="Bold"
                    FontSize="20"
