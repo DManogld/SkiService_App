@@ -12,7 +12,7 @@
         Width="1080"
         WindowStartupLocation="CenterScreen"
         SizeToContent="Height"
-        ResizeMode="NoResize">
+        ResizeMode="CanResizeWithGrip">
     <Window.DataContext>
         <vm:AuftragVerwaltenViewModel />
     </Window.DataContext>
@@ -90,7 +90,8 @@
                         <RibbonButton x:Name="btn2"
                                       Label="Speichern"
                                       LargeImageSource="/image/icons8-save-30.png"
-                                      Command="{Binding CmdSave}">
+                                      Command="{Binding CmdSave}"
+                                      >
                             <Button.ToolTip>
                                 <ToolTip>
                                     <TextBlock>Speichere der bearbeiteten Auftrag...</TextBlock>
@@ -188,8 +189,9 @@
         <GroupBox Header="Auftrag bearbeiten"
                   Grid.Row="2"
                   FontWeight="Bold">
-            <Expander Header="Klicken Sie hier, um ihre eingaben anzuzeigen/auszublenden..."
-                      IsExpanded="False"
+            <Expander 
+                      Header="Klicken Sie hier, um ihre eingaben anzuzeigen/auszublenden..."
+                      IsExpanded="{Binding CmdEdit }"
                       ExpandDirection="Down"
                       x:Name="Expender"
                       FontWeight="Normal">
@@ -216,15 +218,17 @@
                              HorizontalAlignment="Left"
                              Margin="5,0,0,0"
                              TextWrapping="Wrap"
-                             Text="{Binding CurentClient.Name}"
+                             Text="{Binding CurentClient.Name, UpdateSourceTrigger=PropertyChanged}"
                              VerticalAlignment="Center"
+                             
+                            
                              Width="130" />
                     <TextBox Grid.Column="1"
                              Grid.Row="1"
                              HorizontalAlignment="Left"
                              Margin="5,0,0,0"
                              TextWrapping="Wrap"
-                             Text="{Binding CurentClient.Phone}"
+                             Text="{Binding CurentClient.Phone, UpdateSourceTrigger=PropertyChanged}"
                              VerticalAlignment="Center"
                              Width="130" />
                     <TextBox Grid.Column="1"
@@ -267,7 +271,7 @@
                               Margin="0,0,0,0"
                               VerticalAlignment="Center"
                               Width="150"
-                              Text="{Binding CurentClient.FacilityName}">
+                              Text="{Binding CurentClient.FacilityName, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem>Kleiner Service</ComboBoxItem>
                         <ComboBoxItem>Grosse Service</ComboBoxItem>
                         <ComboBoxItem>Rennski Service</ComboBoxItem>
@@ -282,7 +286,7 @@
                               Margin="0,0,0,0"
                               VerticalAlignment="Center"
                               Width="150"
-                              Text="{Binding EditClient.PriorityName}">
+                              Text="{Binding EditClient.PriorityName, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem>Niedrig</ComboBoxItem>
                         <ComboBoxItem IsSelected="True">Mittel</ComboBoxItem>
                         <ComboBoxItem>Hoch</ComboBoxItem>
@@ -293,7 +297,7 @@
                               Margin="0,0,0,0"
                               VerticalAlignment="Center"
                               Width="150"
-                              Text="{Binding CurentClient.StatusName}">
+                              Text="{Binding CurentClient.StatusName, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem IsSelected="True">Offen</ComboBoxItem>
                         <ComboBoxItem>In Bearbeitung</ComboBoxItem>
                         <ComboBoxItem>Abgeschlossen</ComboBoxItem>
@@ -333,7 +337,7 @@
                              Margin="0,0,0,0"
                              Grid.Row="2"
                              TextWrapping="Wrap"
-                             Text="{Binding CurentClient.Kommentar}"
+                             Text="{Binding CurentClient.Kommentar, UpdateSourceTrigger=PropertyChanged}"
                              VerticalAlignment="Center"
                              Width="160" />
                 </Grid>

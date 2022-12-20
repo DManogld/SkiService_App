@@ -196,6 +196,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Documentation\SkiServicesAPP_David__IPERKA.docx" />
+    <None Include="Documentation\SkiServicesAPP_David__IPERKA.pdf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

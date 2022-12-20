@@ -27,6 +27,8 @@ namespace SkiService_App.ViewModel
         public RelayCommand _cmdedit { get; set; }
         public RelayCommand _cmdsave { get; set; }
         public RelayCommand _cmdfilter { get; set; }
+        public RelayCommand _cndedit { get; set; } 
+        //public RelayCommand _cmdedit { get; set; }
         public ObservableCollection<Client> cli { get; set; } = new ObservableCollection<Client>();
         public Task<ObservableCollection<Client>> _client;
         #endregion
@@ -36,7 +38,7 @@ namespace SkiService_App.ViewModel
         /// </summary>
         public AuftragVerwaltenViewModel()
         {
-            //_cmdedit = new RelayCommand(param => Edit());
+            _cmdedit = new RelayCommand(param => Edit());
             _cmdsave = new RelayCommand(param => Save(), param => CantChange());
             _cmdhinzufügen = new RelayCommand(param => Insert());
             _cmdaktualisieren = new RelayCommand(param => Refresh());
@@ -262,6 +264,12 @@ namespace SkiService_App.ViewModel
             {
                 MessageBox.Show("Hola, da ist was schief gelaufen: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        public void Edit()
+        {
+            AuftragVerwaltenView aw = new AuftragVerwaltenView();
+            aw.Expender.IsExpanded = true;
         }
 
 

@@ -48,5 +48,10 @@ namespace SkiService_App.View
         {
             Close();
         }
+
+        private void TextBox_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
     }
 }
